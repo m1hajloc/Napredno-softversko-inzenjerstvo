@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-CU1-ubuntu-20.04
+    container_name: rubydev
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "docker11!!"
+      MSSQL_PID: "Developer"
+    ports:
+      - "51433:1433"
+    volumes:
+      - sql_data:/var/opt/mssql
+    restart: unless-stopped
+
+volumes:
+  sql_data:

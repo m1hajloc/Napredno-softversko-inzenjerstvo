@@ -1,0 +1,16 @@
+.tab-content {
+  padding: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+mat-card {
+  margin-top: 16px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+mat-tab-group {
+  margin-top: 16px;
+}

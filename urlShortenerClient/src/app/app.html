@@ -1,0 +1,40 @@
+<mat-toolbar color="primary">
+  <span>URL Shortener</span>
+  <span class="spacer"></span>
+
+  @if (isLoggedIn) {
+    <button mat-button (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      Log out
+    </button>
+  }
+</mat-toolbar>
+
+<mat-tab-group mat-align-tabs="start">
+  <mat-tab>
+    <ng-template mat-tab-label> <mat-icon>home</mat-icon> Home </ng-template>
+    <app-home />
+  </mat-tab>
+
+  @if (isLoggedIn) {
+    <mat-tab>
+      <ng-template mat-tab-label> <mat-icon>add_link</mat-icon> Create </ng-template>
+      <app-create-url />
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label> <mat-icon>dashboard</mat-icon> Manage </ng-template>
+      <app-manage-urls />
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label> <mat-icon>bar_chart</mat-icon> Clicks </ng-template>
+      <app-clicks />
+    </mat-tab>
+  } @else {
+    <mat-tab>
+      <ng-template mat-tab-label> <mat-icon>login</mat-icon> Log in </ng-template>
+      <app-login />
+    </mat-tab>
+  }
+</mat-tab-group>

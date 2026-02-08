@@ -1,0 +1,24 @@
+<div class="home-wrapper">
+  <mat-card class="home-card">
+    <mat-card-header>
+      <mat-card-title>URL Shortener</mat-card-title>
+      <mat-card-subtitle> Enter short code to redirect </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Short URL code</mat-label>
+        <input matInput [(ngModel)]="shortCode" />
+      </mat-form-field>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary" (click)="redirect()">Go</button>
+    </mat-card-actions>
+    <mat-card-content
+      ><p class="error" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </p></mat-card-content
+    >
+  </mat-card>
+</div>

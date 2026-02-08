@@ -1,0 +1,33 @@
+<div class="home-wrapper">
+  <mat-card class="home-card">
+    <mat-card-header>
+      <mat-card-title>URL Shortener</mat-card-title>
+      <mat-card-subtitle> Edit your URL entities</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-form-field appearance="fill" class="small-select">
+      <mat-label>Select an option</mat-label>
+      <mat-select (selectionChange)="changeId($event.value)">
+        <mat-option *ngFor="let item of entities" [value]="item.id">
+          {{ item.shortUrl }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    @if (selectedEntityId) {
+      <mat-card-content>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Original URL code</mat-label>
+          <input matInput [(ngModel)]="originalUrl" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Short URL code</mat-label>
+          <input matInput [(ngModel)]="shortCode" />
+        </mat-form-field>
+      </mat-card-content>
+    }
+
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary" (click)="save()">Save</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

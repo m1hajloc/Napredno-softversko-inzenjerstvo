@@ -1,0 +1,33 @@
+.home-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.home-card {
+  width: 100%;
+  max-width: 900px; /* Increased from 500px */
+  padding: 20px; /* Add some internal spacing */
+}
+
+.full-width {
+  width: 100%;
+}
+
+mat-card-header {
+  margin-bottom: 20px;
+}
+
+mat-card-title {
+  margin-bottom: 10px; /* reduced slightly so subtitle is closer */
+}
+
+.small-select {
+  width: 100%; /* make the select use full width of the card */
+  margin-bottom: 20px;
+}
+
+.clicksInfo {
+  padding: 10px;
+  border: 1px;
+}
