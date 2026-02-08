@@ -1,144 +1,188 @@
-🔗 URL Shortener
+# URL Shortener – Tutorijal za ASP.NET Core Minimal APIs
 
-Full-stack URL shortening application built with ASP.NET Core and Angular, using SQL Server running in Docker.
+## Uvod
 
-📁 Project Structure
-.
+Ovaj repozitorijum predstavlja **tutorijal i demonstraciju tehnologije ASP.NET Core Minimal APIs**, realizovanu kroz praktičan projekat servisa za skraćivanje URL-ova (URL Shortener).
+
+Cilj tutorijala je da:
+
+- objasni **koji problem Minimal APIs rešavaju**,
+- predstavi njihove **ključne karakteristike**,
+- i demonstrira njihovu upotrebu kroz **jednostavan, ali realan primer**.
+
+Projekat je razvijen kao deo nastavnih obaveza i namenjen je da zameni klasičan seminarski rad.
+
+---
+
+## Problem koji tehnologija rešava
+
+Klasičan pristup razvoju web API aplikacija u ASP.NET Core okruženju (MVC, Controllers) često:
+
+- zahteva veliku količinu boilerplate koda,
+- uvodi nepotrebne apstrakcije,
+- otežava brzo prototipiranje manjih servisa.
+
+Za jednostavne servise kao što su:
+
+- REST API-ji,
+- mikroservisi,
+- interni backend servisi,
+
+potrebno je **lakše i direktnije rešenje** koje omogućava brzo mapiranje HTTP zahteva na logiku aplikacije.
+
+---
+
+## Rešenje: ASP.NET Core Minimal APIs
+
+**Minimal APIs** omogućavaju:
+
+- definisanje ruta direktno u `Program.cs`,
+- automatski model binding,
+- integraciju sa Dependency Injection mehanizmom,
+- jednostavan razvoj REST servisa uz minimalnu konfiguraciju.
+
+Ovaj projekat koristi Minimal APIs kao centralnu backend tehnologiju i demonstrira:
+
+- mapiranje HTTP ruta (`MapGet`, `MapPost`, `MapPut`),
+- rad sa zaglavljima (API Key),
+- povezivanje sa bazom podataka,
+- redirekciju HTTP zahteva.
+
+---
+
+## Arhitektura sistema
+
+Sistem je podeljen na tri osnovne celine:
+
+### Komponente sistema
+
+- **Angular klijentska aplikacija**
+  - korisnički interfejs
+  - slanje zahteva ka backendu
+
+- **ASP.NET Core Minimal API**
+  - obrada zahteva
+  - validacija i logika aplikacije
+  - redirekcija kratkih URL-ova
+
+- **SQL Server baza**
+  - čuvanje URL-ova i statistike klikova
+  - pokrenuta u Docker kontejneru
+
+---
+
+## Korišćene tehnologije
+
+### Backend
+
+- ASP.NET Core
+- Minimal APIs
+- Entity Framework Core
+- SQL Server
+
+### Frontend
+
+- Angular
+- Angular Material
+- RxJS
+
+### Infrastruktura
+
+- Docker
+- Docker Compose
+
+---
+
+## Struktura repozitorijuma
+
+/
+├── URLShorteningService # Backend – Minimal API
+├── urlShortenerClient # Frontend – Angular
+├── docker-compose.yml # SQL Server kontejner
 ├── .gitignore
-├── README.md
-├── URLShorteningService # ASP.NET Core backend
-└── urlShortenerClient # Angular frontend
+└── README.md
 
-🧰 Tech Stack
-Backend
+---
 
-ASP.NET Core
+## Pokretanje projekta
 
-Entity Framework Core
+### Preduslovi
 
-SQL Server
+Neophodno je da su instalirani:
 
-Docker & Docker Compose
+- .NET SDK (7 ili noviji)
+- Node.js (LTS)
+- Angular CLI
+- Docker i Docker Compose
 
-Frontend
+---
 
-Angular
+### 1️⃣ Pokretanje baze podataka (Docker)
 
-Angular Material
-
-RxJS
-
-✅ Prerequisites
-
-Make sure you have the following installed:
-
-.NET SDK 8+
-
-dotnet --version
-
-Node.js 18+
-
-node --version
-
-Angular CLI
-
-npm install -g @angular/cli
-
-Docker
-
-docker --version
-
-EF Core CLI
-
-dotnet tool install --global dotnet-ef
-
-Restart your terminal after installing dotnet-ef.
-
-🐳 Database (SQL Server with Docker)
-
-The project uses SQL Server running in Docker.
-
-Start the database
-
-From the root folder:
+Iz root direktorijuma projekta pokrenuti:
 
 docker compose up -d
 
-Verify it’s running:
+Ovim se pokreće SQL Server baza unutar Docker kontejnera.
 
-docker ps
+---
 
-SQL Server will be available on:
+### 2️⃣ Primena migracija baze podataka
 
-localhost:51433
+U backend projektu izvršiti:
 
-🗄️ Database Migrations
-1️⃣ Go to backend project
 cd URLShorteningService
-
-2️⃣ Apply migrations
 dotnet ef database update
 
-If no migrations exist yet:
+---
 
-dotnet ef migrations add InitialCreate
-dotnet ef database update
+### 3️⃣ Pokretanje backend aplikacije
 
-▶️ Running the Backend
-
-From URLShorteningService:
+U backend folderu pokrenuti:
 
 dotnet run
 
-Backend will start on something like:
+Backend aplikacija će biti dostupna na:
 
-https://localhost:5001
+http://localhost:5000
 
-▶️ Running the Frontend
+---
 
-From urlShortenerClient:
+### 4️⃣ Pokretanje frontend aplikacije
 
+U frontend folderu izvršiti:
+
+cd urlShortenerClient
 npm install
 ng serve
 
-Frontend will be available at:
+Frontend aplikacija će biti dostupna na:
 
 http://localhost:4200
 
-🔐 Authentication
+---
 
-Authentication is currently handled via an API key sent in request headers:
+## Korišćenje aplikacije
 
-X-Api-Key: <your-api-key>
+### Korišćenje samo backend servisa
 
-(This will be improved in future iterations.)
+Minimal API omogućava direktno korišćenje kroz browser:
 
-🌍 CORS
+http://localhost:5000/{shortUrl}
 
-CORS is configured to allow requests from:
+Primer:
 
-http://localhost:4200
+http://localhost:5000/abc123
 
-🚀 Future Improvements
+Ovim se vrši redirekcija na originalni URL.
 
-Proper login & token-based authentication
+---
 
-Route guards in Angular
+### Korišćenje kompletne aplikacije
 
-Refresh tokens
+Aplikacija omogućava:
 
-Better error handling
-
-Analytics dashboard improvements
-
-🛠️ Development Notes
-
-Angular and backend are kept in the same repository for easier development
-
-Docker is used only for infrastructure (database)
-
-No secrets are committed to the repository
-
-📜 License
-
-MIT
+- prijavu korisnika putem email-a
+- kreiranje kratkih URL-ova
+- pregled postojećih URL-ova
+- praćenje broja klikova po URL-u
