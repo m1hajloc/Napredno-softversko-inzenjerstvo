@@ -96,9 +96,9 @@ Sistem je podeljen na tri osnovne celine:
 ## Struktura repozitorijuma
 
 /
-├── URLShorteningService # Backend – Minimal API
-├── urlShortenerClient # Frontend – Angular
-├── docker-compose.yml # SQL Server kontejner
+├── URLShorteningService/
+├── urlShortenerClient/
+├── docker-compose.yml
 ├── .gitignore
 └── README.md
 
